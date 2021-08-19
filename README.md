@@ -15,8 +15,8 @@ chmod +x ./linGhost.sh
 ./linGhost.sh
 ```
 
-#### Screen-Shots
-![](image/banner.png)
+#### Screenshots
+![](images/banner.png)
 
 [-] Todo : Documentation
 
