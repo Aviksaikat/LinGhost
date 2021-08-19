@@ -267,8 +267,6 @@ print_title "Useful Softwares"
 command -v "$CONTAINER_CMDS" nmap aws nc ncat netcat nc.traditional wget curl ping gcc g++ make gdb base64 socat python python2 python3 python2.7 python2.6 python3.6 python3.7 perl php ruby xterm doas sudo fetch ctr 2>/dev/null
 echo ""
 
-
-
 print_title "Cornjobs"
 print_URL "https://book.hacktricks.xyz/linux-unix/privilege-escalation#scheduled-cron-jobs"
 
