@@ -7,6 +7,17 @@
 
 - I used the methods of `HackTricks`(https://book.hacktricks.xyz/linux-unix/privilege-escalation) and tried to keep this as simple as possible and beginner friendly.
 
+#### Usage
+```bash
+git clone https://github.com/Aviksaikat/LinGhost
+cd LinGhost
+chmod +x ./linGhost.sh
+./linGhost.sh
+```
+
+#### Screen-Shots
+![](image/banner.png)
+
 [-] Todo : Documentation
 
-###### P.S. This is not an Linpease alternative. It's for fun and CTF purpose only.
+##### P.S. This is not a Linpease alternative. It's for fun and CTF purpose only.
