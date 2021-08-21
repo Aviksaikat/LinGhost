@@ -16,7 +16,31 @@ chmod +x ./linGhost.sh
 ```
 
 #### Screenshots
+- Banner
 ![](images/banner.png)
+
+- User information 
+![](images/pic1.png)
+- Sudo version
+![](images/pic2.png)
+- Path information
+![](images/pic3.png)
+- Kernel information
+![](images/pic4.png)
+- Useful softwares installed on the machine
+![](images/pic5.png)
+- Cronjobs 
+![](images/pic6.png)
+- Routing table
+![](images/pic8.png)
+- Hosts file
+![](images/pic9.png)
+- Open local ports 
+![](images/pic10.png)
+- Suggested commands
+![](images/pic11.png)
+- SUID binaries
+![](images/pic12.png)
 
 [-] Todo : Documentation
 
