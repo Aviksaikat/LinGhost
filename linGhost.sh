@@ -140,7 +140,7 @@ print_ROOT(){
 
 #Starting with banner printing
 print_BANNER
-
+echo "${RED}@Author: SAIKAT KARMAKAR ${BLUE}https://github.com/Aviksaikat/${NC} "
 
 # All variables
 idB="euid|egid$baduid"
