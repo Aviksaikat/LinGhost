@@ -151,6 +151,13 @@ groupsVB="\(sudo\)|\(docker\)|\(lxd\)|\(disk\)|\(lxc\)"
 knw_grps='\(lpadmin\)|\(cdrom\)|\(plugdev\)|\(nogroup\)' #https://www.togaware.com/linux/survivor/Standard_Groups.html
 mygroups=$(groups 2>/dev/null | tr " " "|")
 
+if [ "$(/usr/bin/id -u)" -eq "0" ]; then
+  IAMROOT="1"
+  MAXPATH_FIND_W="3"
+else
+  IAMROOT=""
+  MAXPATH_FIND_W="7"
+fi
 
 knw_usrs='daemon\W|^daemon$|message\+|syslog|www|www-data|mail|noboby|Debian\-\+|rtkit|systemd\+'
 USER=$(whoami 2>/dev/null || echo "UserUnknown")
@@ -343,7 +350,22 @@ find / -perm -4000 2>/dev/null
 #find / -user root -perm -4000 -exec ls -ldb {} \; 2>/dev/null
 echo ""
 
-
+print_title "Other Binary Capabilities"
+getcap -r / 2>/dev/null
 # print_title "Processes"
 # (ps -ef || ps aux 2>/dev/null)
 # echo ""
+
+# Writable directories
+print_title "Writable Directories"
+# find / -perm -222 -type d 2>/dev/null || find / -writable -type d 2>/dev/null || find / -perm -o w -type d 2>/dev/null
+
+WF=`find / -maxdepth $MAXPATH_FIND_W -type d ! -path "/proc/*" -and '(' -writable -or -user $USER ')' 2>/dev/null | sort`
+
+Wfolders=$(printf "%s" "$WF" | tr '\n' '|')"|[^\*][^\ ]*\ \*"
+Wfolder="$(printf "%s" "$WF" | grep "tmp\|shm\|home\|Users\|root\|etc\|var\|opt\|bin\|lib\|mnt\|private\|Applications" | head -n1)"
+printf "test\ntest\ntest\ntest"| sed -${E} "s,$Wfolders|\./|\.:|:\.,${SED_RED_YELLOW},g" >/dev/null 2>&1
+
+
+print_title "Dumping Environment"
+env 2>/dev/null
