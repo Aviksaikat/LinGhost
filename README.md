@@ -1,8 +1,8 @@
-# LinGhost - Linux Privilege Escalation Tool
+# LinGhost - Linux Privilege Escalation Tool 👻
 
 > Saikat Karmakar | Aug : 2021
 
-![](images/untitled.png)
+![](images/untitled.svg)
 
 - This tool gives information about critical files which can be used for privilege escalation on linux/unix systems. It is heavily inspired by `Linpease` but more simple and intended to do CTF challenges like HackTheBox, TryHackme etc.
 
