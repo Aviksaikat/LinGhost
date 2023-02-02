@@ -5,7 +5,7 @@
 # @Last Modified time: 2021-08-19 23:22:49
 
 # Print & color information
-C=$(printf '\033')
+C=$(printf "\033")
 RED="${C}[1;31m"
 SED_RED="${C}[1;31m&${C}[0m"
 GREEN="${C}[1;32m"
@@ -148,7 +148,7 @@ sudovB="[01].[012345678].[0-9]+|1.9.[01234]|1.9.5p1"
 
 groupsB="\(root\)|\(shadow\)|\(admin\)|\(video\)|\(adm\)|\(wheel\)|\(auth\)"
 groupsVB="\(sudo\)|\(docker\)|\(lxd\)|\(disk\)|\(lxc\)"
-knw_grps='\(lpadmin\)|\(cdrom\)|\(plugdev\)|\(nogroup\)' #https://www.togaware.com/linux/survivor/Standard_Groups.html
+knw_grps="\(lpadmin\)|\(cdrom\)|\(plugdev\)|\(nogroup\)" #https://www.togaware.com/linux/survivor/Standard_Groups.html
 mygroups=$(groups 2>/dev/null | tr " " "|")
 
 if [ "$(/usr/bin/id -u)" -eq "0" ]; then
@@ -159,7 +159,7 @@ else
   MAXPATH_FIND_W="7"
 fi
 
-knw_usrs='daemon\W|^daemon$|message\+|syslog|www|www-data|mail|noboby|Debian\-\+|rtkit|systemd\+'
+knw_usrs="daemon\W|^daemon$|message\+|syslog|www|www-data|mail|noboby|Debian\-\+|rtkit|systemd\+"
 USER=$(whoami 2>/dev/null || echo "UserUnknown")
 if [ ! "$HOME" ]; 
 	then
@@ -170,7 +170,7 @@ if [ ! "$HOME" ];
 			HOME="/home/$USER";
 		fi
 fi
-Groups="ImPoSSssSiBlEee"$(groups "$USER" 2>/dev/null | cut -d ":" -f 2 | tr ' ' '|')
+Groups="ImPoSSssSiBlEee"$(groups "$USER" 2>/dev/null | cut -d ":" -f 2 | tr " " "|")
 
 OLDPATH=$PATH
 ADDPATH=":/usr/local/sbin\
@@ -187,9 +187,9 @@ fi
 done
 
 E=E
-echo | sed -${E} 's/o/a/' 2>/dev/null
+echo | sed -${E} "s/o/a/" 2>/dev/null
 if [ $? -ne 0 ] ; then
-	echo | sed -r 's/o/a/' 2>/dev/null
+	echo | sed -r "s/o/a/" 2>/dev/null
 	if [ $? -eq 0 ] ; then
 		E=r
 	else
@@ -204,7 +204,7 @@ print_info "https://book.hacktricks.xyz/linux-unix/privilege-escalation#users"
 echo ""
 
 print_ROOT "Super User Accounts"
-awk -F: '($3 == "0") {print}' /etc/passwd 2>/dev/null 
+awk -F: "($3 == "0") {print}" /etc/passwd 2>/dev/null
 echo ""
 
 #-- SY) Sudo
@@ -215,10 +215,10 @@ if [ "$(command -v sudo 2>/dev/null)" ];
 		print_info "https://book.hacktricks.xyz/linux-unix/privilege-escalation#sudo-version"
 		sudo -V 2>/dev/null | grep "Sudo ver" | sed -${E} "s,$sudovB,${SED_RED},"
 
-	sv=$(sudo -V 2>/dev/null | head -1 | grep -E "[0-9][a-z]*\.*" | cut -d ' ' -f3)
+	sv=$(sudo -V 2>/dev/null | head -1 | grep -E "[0-9][a-z]*\.*" | cut -d " " -f3)
 	#sv=1.27
 	vsv=1.28
-	if (( $(echo $sv'<='$vsv | bc -l 2>/dev/null) ));
+	if (( $(echo $sv"<="$vsv | bc -l 2>/dev/null) ));
 		then
 			#print_info 
 			print_RY "Exploit"
@@ -330,17 +330,17 @@ echo ""
 print_ALL "Trying sudo -l"
 echo "" 
 # try excpet here
-$(echo '' | sudo -S -l 2>/dev/null )  || echo "Can't run try running ${RED}sudo -l${NC} with password"
+$(echo "" | sudo -S -l 2>/dev/null )  || echo "Can"t run try running ${RED}sudo -l${NC} with password"
 echo ""
 
 print_ALL "Trying to find ssh keys"
 echo ""
-path=$(grep -r " .* PRIVATE *" $HOME/.ssh | head -1 | cut -d ':' -f1)
+path=$(grep -r " .* PRIVATE *" $HOME/.ssh | head -1 | cut -d ":" -f1)
 if [ $path ];
 	then
 		echo "${RED}ssh keys here ${path}"
 else
-	echo "Can't access ssh keys look manually"
+	echo "Can"t access ssh keys look manually"
 fi
 echo ""
 
@@ -360,9 +360,9 @@ getcap -r / 2>/dev/null
 print_title "Writable Directories"
 # find / -perm -222 -type d 2>/dev/null || find / -writable -type d 2>/dev/null || find / -perm -o w -type d 2>/dev/null
 
-WF=`find / -maxdepth $MAXPATH_FIND_W -type d ! -path "/proc/*" -and '(' -writable -or -user $USER ')' 2>/dev/null | sort`
+WF=`find / -maxdepth $MAXPATH_FIND_W -type d ! -path "/proc/*" -and "(" -writable -or -user $USER ")" 2>/dev/null | sort`
 
-Wfolders=$(printf "%s" "$WF" | tr '\n' '|')"|[^\*][^\ ]*\ \*"
+Wfolders=$(printf "%s" "$WF" | tr "\n" "|")"|[^\*][^\ ]*\ \*"
 Wfolder="$(printf "%s" "$WF" | grep "tmp\|shm\|home\|Users\|root\|etc\|var\|opt\|bin\|lib\|mnt\|private\|Applications" | head -n1)"
 printf "test\ntest\ntest\ntest"| sed -${E} "s,$Wfolders|\./|\.:|:\.,${SED_RED_YELLOW},g" >/dev/null 2>&1
 

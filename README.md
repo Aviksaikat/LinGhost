@@ -2,6 +2,7 @@
 
 > Saikat Karmakar | Aug : 2021
 
+![](images/untitled.png)
 
 - This tool gives information about critical files which can be used for privilege escalation on linux/unix systems. It is heavily inspired by `Linpease` but more simple and intended to do CTF challenges like HackTheBox, TryHackme etc.
 
@@ -44,4 +45,4 @@ chmod +x ./linGhost.sh
 
 [-] Todo : Documentation
 
-##### P.S. This is not a Linpease alternative. It's for fun and CTF purpose only.
+##### P.S. This is not a Linpease alternative. It"s for fun and CTF purpose only.
